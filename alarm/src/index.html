@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Alarm Clock</title>
+    <style>
+        /* CSS styling */
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #E8EBE4;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        .container {
+            background-color: #D2D5DD;
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            color: #798071;
+            text-align: center;
+        }
+        input[type="time"] {
+            width: 100%;
+            margin: 10px 0;
+            padding: 10px;
+            font-size: 18px;
+            border-radius: 5px;
+            border: 1px solid #999AC6;
+            box-sizing: border-box;
+        }
+        input[type="button"] {
+            margin: 5px;
+            padding: 10px 20px;
+            border: none;
+            background-color: #999AC6;
+            color: white;
+            font-size: 18px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        input[type="button"]:hover {
+            background-color: #798071;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Set Alarm</h1>
+        <input type="time" id="alarmTime">
+        <input type="button" value="Set Alarm" onclick="setAlarm()">
+    </div>
+
+    <script>
+        // JavaScript for setting the alarm
+        function setAlarm() {
+            // Get the alarm time input value
+            let alarmInput = document.getElementById('alarmTime').value;
+            
+            // Check if the input value is empty
+            if (alarmInput === '') {
+                alert('Please enter a valid time for the alarm.');
+                return;
+            }
+
+            // Parse the alarm time input
+            let alarmTime = new Date(alarmInput);
+
+            // Get the current time
+            let currentTime = new Date();
+
+            // Calculate the time difference in milliseconds
+            let timeDiff = alarmTime.getTime() - currentTime.getTime();
+
+            // Check if the alarm time is in the past
+            if (timeDiff <= 0) {
+                alert('Please enter a future time for the alarm.');
+                return;
+            }
+
+            // Set a timeout to trigger the alarm
+            setTimeout(function() {
+                alert('Alarm! Time to wake up!');
+            }, timeDiff);
+        }
+    </script>
+</body>
+</html>
